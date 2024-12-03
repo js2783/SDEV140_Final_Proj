@@ -3,7 +3,39 @@ root = Tk()
 
 my_label = Label(root, text = "My Window")
 
-my_label.pack()
+#label window title
+root.title("The Recipe Hub")
+
+#label header
+my_label = Label(root, text = "Welcome")
+
+#size window
+root.geometry("600x400")
+
+#organize the window by creating frames
+#frame1
+frame1 = LabelFrame(root, text = "Welcome", padx=10, pady=10)
+frame1.grid(row = 0, column = 0, rowspan = 10, columnspan=10)
+
+#frame 2
+frame2 = LabelFrame(root, text="Frame 2", padx=10, pady=10)
+frame2.grid(row = 0, column = 25, rowspan=10, columnspan=10)
+
+#add label to frame 1
+#need to define variables below then delete this row
+celsius = Label(frame1, text="Enter temp in Celsius")
+celsius.grid(row=0, column=0) #add to the grid
+#second label
+fheit = Label(frame1, text="Enter temp in Farenheit")
+fheit.grid(row=5, column=0)
+
+#add textbox to frame 1
+entercelsius = Entry(frame1, width=20)
+entercelsius.grid(row=0, column=5)
+
+#add text to second label in Frame 1
+enterfheit = Entry(frame1, width=20)
+enterfheit.grid(row=5, column=5)
 
 #to end any tkinter, need end command
 root.mainloop()
