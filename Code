@@ -1,0 +1,9 @@
+from tkinter import *
+root = Tk()
+
+my_label = Label(root, text = "My Window")
+
+my_label.pack()
+
+#to end any tkinter, need end command
+root.mainloop()
