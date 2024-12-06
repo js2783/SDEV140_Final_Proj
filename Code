@@ -10,32 +10,91 @@ root.title("The Recipe Hub")
 my_label = Label(root, text = "Welcome")
 
 #size window
-root.geometry("600x400")
+root.geometry("1000x600")
 
 #organize the window by creating frames
 #frame1
-frame1 = LabelFrame(root, text = "Welcome", padx=10, pady=10)
+frame1 = LabelFrame(root, text = "Welcome", padx=10, pady=10, background = "#f7d486")    
 frame1.grid(row = 0, column = 0, rowspan = 10, columnspan=10)
 
 #frame 2
-frame2 = LabelFrame(root, text="Frame 2", padx=10, pady=10)
-frame2.grid(row = 0, column = 25, rowspan=10, columnspan=10)
+frame2 = LabelFrame(root, padx=10, pady=10, background = "#f27a7d")
+frame2.grid(row = 0, column = 40, rowspan=10, columnspan=10)
 
-#add label to frame 1
-#need to define variables below then delete this row
-celsius = Label(frame1, text="Enter temp in Celsius")
-celsius.grid(row=0, column=0) #add to the grid
-#second label
-fheit = Label(frame1, text="Enter temp in Farenheit")
-fheit.grid(row=5, column=0)
+#frame 3
+frame3 = LabelFrame(root, text="New Recipe Intake Form", padx=250, pady=10, background = "#C5f9d7")
+frame3.grid(row = 25, column = 0, columnspan=80)
 
-#add textbox to frame 1
-entercelsius = Entry(frame1, width=20)
-entercelsius.grid(row=0, column=5)
+# Add a label with a paragraph of text to frame 1
+paragraph = (
+    "Welcome to Recipe Hub, your go-to destination for all things culinary! Discover delicious recipes or share your own creations with our vibrant community. Let’s make cooking fun and inspiring! \n\nTo get started, search for a recipe or use the Intake form to enter a new one. "
+)
+label = Label(frame1, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = "#f7d486")
+label.grid(pady=20)
 
-#add text to second label in Frame 1
-enterfheit = Entry(frame1, width=20)
-enterfheit.grid(row=5, column=5)
+#add text to label in Frame 2
+photo = Entry(frame2, width=20)
+photo.grid(row=0, column=40)
+
+
+# Add a paragraph of text to frame 2
+paragraph = (
+    "<photo placeholder> \nA recipe has no soul. You, as the cook, must bring soul to the recipe. \nThomas Keller"
+)
+label = Label(frame2, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = '#f27a7d')
+label.grid(pady=20)
+
+#add labels to frame 3
+recipeName = Label(frame3, text="Recipe Name", padx=10, pady=10, background = "#C5f9d7")
+recipeName.grid(row=25, column=0) #add to the grid
+ingredient = Label(frame3, text="Ingredients", padx=10, pady=10, background = "#C5f9d7")
+ingredient.grid(row=35, column=0)
+cooking = Label(frame3, text="Cooking Instructions", padx=10, pady=10, background = "#C5f9d7")
+cooking.grid(row=45, column=0)
+photo = Label(frame3, text="Photo", padx=10, pady=10, background = "#C5f9d7")
+photo.grid(row=55, column=0)
+cuisine = Label(frame3, text="Cuisine/Category", padx=10, pady=10, background = "#C5f9d7")
+cuisine.grid(row=65, column=0)
+source = Label(frame3, text="Source", padx=10, pady=10, background = "#C5f9d7")
+source.grid(row=75, column=0)
+tips = Label(frame3, text="Tips/modifications for next time", padx=10, pady=10, background = "#C5f9d7")
+tips.grid(row=85, column=0)
+
+#add textbox to frame 3
+entrecipeName = Entry(frame3, width=20)
+entrecipeName.grid(row=25, column=5)
+entingred = Entry(frame3, width=20)
+entingred.grid(row=35, column=5)
+entCooking = Entry(frame3, width=20)
+entCooking.grid(row=45, column=5)
+entPhoto = Entry(frame3, width=20)
+entPhoto.grid(row=55, column=5)
+entCuisine = Entry(frame3, width=20)
+entCuisine.grid(row=65, column=5)
+entSource = Entry(frame3, width=20)
+entSource.grid(row=75, column=5)
+entTips = Entry(frame3, width=20)
+entTips.grid(row=85, column=5)
+
+#add Submit button
+buttonLabel = Label(frame3, text = "Submit")
+buttonLabel.grid(row=100, column=200)
+
+#creating a second window, done with toplevel function
+#create function to open window, make a button you click to launch the window
+def open_window():
+  window2 = Toplevel(root) #creates a  new window object
+  window2.title("Second Window")
+  window2.geometry("1000x600")
+#create a label to display in the second window
+  windowLabel = Label(window2, text = "Label on second window")
+  windowLabel.grid(row = 0, column = 0, columnspan = 10, rowspan = 10)
+  window2.mainloop()
+
+#button to launch new window for Submit off of mainWindow
+newWindow = Button(root, text = "Submit", command = open_window)
+newWindow.grid(row = 35, column = 0)
+
 
 #to end any tkinter, need end command
 root.mainloop()
