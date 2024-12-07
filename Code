@@ -14,16 +14,21 @@ root.geometry("1000x600")
 
 #organize the window by creating frames
 #frame1
-frame1 = LabelFrame(root, text = "Welcome", padx=10, pady=10, background = "#f7d486")    
-frame1.grid(row = 0, column = 0, rowspan = 10, columnspan=10)
+frame1 = LabelFrame(root, text = "Welcome", background = "#f7d486", padx=10, pady=10)    
+frame1.grid(row = 0, column = 0, rowspan = 10, columnspan=10, sticky="nsew")
 
 #frame 2
-frame2 = LabelFrame(root, padx=10, pady=10, background = "#f27a7d")
-frame2.grid(row = 0, column = 40, rowspan=10, columnspan=10)
+frame2 = LabelFrame(root, background = "#f27a7d", padx=10, pady=10)
+frame2.grid(row = 0, column = 25, rowspan=10, columnspan=10, sticky="nsew")
+
+#configure grid to make frames equal size
+root.grid_columnconfigure(0, weight=1)
+root.grid_columnconfigure(1, weight=1)
+root.grid_rowconfigure(0, weight=1)
 
 #frame 3
-frame3 = LabelFrame(root, text="New Recipe Intake Form", padx=250, pady=10, background = "#C5f9d7")
-frame3.grid(row = 25, column = 0, columnspan=80)
+frame3 = LabelFrame(root, text="New Recipe Intake Form", background = "#C5f9d7", padx=10, pady=10)
+frame3.grid(row = 25, column = 0, rowspan=10, columnspan=250, sticky="nsew")
 
 # Add a label with a paragraph of text to frame 1
 paragraph = (
@@ -78,7 +83,7 @@ entTips.grid(row=85, column=5)
 
 #add Submit button
 buttonLabel = Label(frame3, text = "Submit")
-buttonLabel.grid(row=100, column=200)
+buttonLabel.place(relx=0.9, rely=0.9, anchor="e")
 
 #creating a second window, done with toplevel function
 #create function to open window, make a button you click to launch the window
@@ -92,7 +97,7 @@ def open_window():
   window2.mainloop()
 
 #button to launch new window for Submit off of mainWindow
-newWindow = Button(root, text = "Submit", command = open_window)
+newWindow = Button(root, text = "Submit  new window", command = open_window)
 newWindow.grid(row = 35, column = 0)
 
 
