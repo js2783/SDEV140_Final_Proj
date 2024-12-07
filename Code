@@ -1,8 +1,6 @@
 from tkinter import *
 root = Tk()
 
-my_label = Label(root, text = "My Window")
-
 #label window title
 root.title("The Recipe Hub")
 
@@ -10,25 +8,29 @@ root.title("The Recipe Hub")
 my_label = Label(root, text = "Welcome")
 
 #size window
-root.geometry("1000x600")
+root.geometry("1100x700")
 
 #organize the window by creating frames
-#frame1
+#frame1 welcome
 frame1 = LabelFrame(root, text = "Welcome", background = "#f7d486", padx=10, pady=10)    
-frame1.grid(row = 0, column = 0, rowspan = 10, columnspan=10, sticky="nsew")
+frame1.grid(row = 3, column = 0, rowspan = 10, columnspan=10, sticky="nsew")
 
-#frame 2
+#frame 2 photo/quote
 frame2 = LabelFrame(root, background = "#f27a7d", padx=10, pady=10)
-frame2.grid(row = 0, column = 25, rowspan=10, columnspan=10, sticky="nsew")
+frame2.grid(row = 3, column = 25, rowspan=10, columnspan=10, sticky="nsew")
+
+#frame 3 intake form
+frame3 = LabelFrame(root, text="New Recipe Intake Form", background = "#C5f9d7", padx=10, pady=10)
+frame3.grid(row = 25, column = 0, rowspan=10, columnspan=250, sticky="nsew")
+
+#frame 4 header
+frame4 = LabelFrame(root, background = "light gray")
+frame4.grid(row = 0, column = 0, rowspan=1, columnspan=250, sticky="nsew")
 
 #configure grid to make frames equal size
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 root.grid_rowconfigure(0, weight=1)
-
-#frame 3
-frame3 = LabelFrame(root, text="New Recipe Intake Form", background = "#C5f9d7", padx=10, pady=10)
-frame3.grid(row = 25, column = 0, rowspan=10, columnspan=250, sticky="nsew")
 
 # Add a label with a paragraph of text to frame 1
 paragraph = (
@@ -37,10 +39,17 @@ paragraph = (
 label = Label(frame1, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = "#f7d486")
 label.grid(pady=20)
 
-#add text to label in Frame 2
+#add photo to Frame 2
 photo = Entry(frame2, width=20)
 photo.grid(row=0, column=40)
 
+#add search box in frame 4
+searchLabel = Label(frame4, text="Search:", width=10, background="light gray")
+searchLabel.grid(row=0, column=30)
+searchLabel.place(relx=0.6, rely=0.25, anchor="e")
+searchEntry = Entry(frame4, width=40)
+searchEntry.grid(row=0, column=50)
+searchEntry.place(relx=0.9, rely=0.25, anchor="e")
 
 # Add a paragraph of text to frame 2
 paragraph = (
@@ -60,45 +69,78 @@ photo = Label(frame3, text="Photo", padx=10, pady=10, background = "#C5f9d7")
 photo.grid(row=55, column=0)
 cuisine = Label(frame3, text="Cuisine/Category", padx=10, pady=10, background = "#C5f9d7")
 cuisine.grid(row=65, column=0)
-source = Label(frame3, text="Source", padx=10, pady=10, background = "#C5f9d7")
-source.grid(row=75, column=0)
-tips = Label(frame3, text="Tips/modifications for next time", padx=10, pady=10, background = "#C5f9d7")
-tips.grid(row=85, column=0)
 
 #add textbox to frame 3
-entrecipeName = Entry(frame3, width=20)
+entrecipeName = Entry(frame3, width=100)
 entrecipeName.grid(row=25, column=5)
-entingred = Entry(frame3, width=20)
-entingred.grid(row=35, column=5)
-entCooking = Entry(frame3, width=20)
-entCooking.grid(row=45, column=5)
-entPhoto = Entry(frame3, width=20)
+entingred = Text(frame3, height=5, width=75) #multi-line entry field
+entingred.grid(row=35, column=5, padx=10, pady=10)
+entCooking = Text(frame3, height=5, width=75) #multi-line entry field
+entCooking.grid(row=45, column=5, padx=10, pady=10)
+entPhoto = Entry(frame3, width=100)
 entPhoto.grid(row=55, column=5)
-entCuisine = Entry(frame3, width=20)
+entCuisine = Entry(frame3, width=100)
 entCuisine.grid(row=65, column=5)
-entSource = Entry(frame3, width=20)
-entSource.grid(row=75, column=5)
-entTips = Entry(frame3, width=20)
-entTips.grid(row=85, column=5)
 
-#add Submit button
-buttonLabel = Label(frame3, text = "Submit")
-buttonLabel.place(relx=0.9, rely=0.9, anchor="e")
+#can likely delete entire submit_form section
+def submit_form():
+    """Build function to support entries enterd into the form"""
+    # Get single-line entries
+    name = entry_entrecipeName.get()
+    photo = entry_entPhoto.get()
+    cuisine = entry_entCuisine.get()
+    
+    # Get multi-line entries
+    ingred = text_entingred.get("1.0", tk.END).strip()
+    cooking = text_entCooking.get("1.0", tk.END).strip()
+    
+    # Process the data (e.g., save to file or database)
+    print("Form Data:")
+    print(f"Name: {name}")
+    print(f"Ingredients: {ingred}")
+    print(f"Cooking Instructions: {cooking}")
+    print(f"Cuisine: {cuisine}")
+    
+    # Display confirmation message
+    confirmation_label.config(text="Form submitted successfully!")
+
+    # Clear all inputs (optional)
+    #entry_name.delete(0, tk.END)
+    #entry_email.delete(0, tk.END)
+    #text_address.delete("1.0", tk.END)
+    #text_comments.delete("1.0", tk.END)
+
+#add Submit button - DELETE
+#buttonLabel = Button(frame3, text = "Submit", command = submit_form)
+#buttonLabel.place(relx=0.9, rely=0.9, anchor="e")
+
+# Label for confirmation message - DELETE?? 
+confirmation_label = Label(frame3, text="", fg="green", font=("Arial", 10, "italic"))
+confirmation_label.grid(pady=10)
+
 
 #creating a second window, done with toplevel function
 #create function to open window, make a button you click to launch the window
 def open_window():
+  """Create second window to show confirmation message upon entering a new repice via the intake form"""
   window2 = Toplevel(root) #creates a  new window object
-  window2.title("Second Window")
-  window2.geometry("1000x600")
+  window2.title("The Recipe Hub - Intake Form submission")
+  window2.geometry("500x200")
 #create a label to display in the second window
-  windowLabel = Label(window2, text = "Label on second window")
+  windowLabel = Label(window2, text = "Form submitted successfully!\nClose the form and relaunch to enter a new recipe.", justify = "left")
   windowLabel.grid(row = 0, column = 0, columnspan = 10, rowspan = 10)
   window2.mainloop()
+# Clear all inputs upon closing window
+  entry_entrecipeName.delete(0, tk.END)
+  entry_entPhoto.delete(0, tk.END)
+  entry_entCuisine.delete(0, tk.END)
+  text_entingred.delete("1.0", tk.END)
+  text_entCooking.delete("1.0", tk.END)
 
 #button to launch new window for Submit off of mainWindow
-newWindow = Button(root, text = "Submit  new window", command = open_window)
+newWindow = Button(frame3, text = "Submit", command = open_window)
 newWindow.grid(row = 35, column = 0)
+newWindow.place(relx=0.9, rely=0.9, anchor="e")
 
 
 #to end any tkinter, need end command
