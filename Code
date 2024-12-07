@@ -8,7 +8,7 @@ root.title("The Recipe Hub")
 my_label = Label(root, text = "Welcome")
 
 #size window
-root.geometry("1100x700")
+root.geometry("1000x600")
 
 #organize the window by creating frames
 #frame1 welcome
@@ -46,10 +46,10 @@ photo.grid(row=0, column=40)
 #add search box in frame 4
 searchLabel = Label(frame4, text="Search:", width=10, background="light gray")
 searchLabel.grid(row=0, column=30)
-searchLabel.place(relx=0.6, rely=0.25, anchor="e")
+searchLabel.place(relx=0.65, rely=0.5, anchor="e")
 searchEntry = Entry(frame4, width=40)
 searchEntry.grid(row=0, column=50)
-searchEntry.place(relx=0.9, rely=0.25, anchor="e")
+searchEntry.place(relx=0.9, rely=0.5, anchor="e")
 
 # Add a paragraph of text to frame 2
 paragraph = (
@@ -81,42 +81,6 @@ entPhoto = Entry(frame3, width=100)
 entPhoto.grid(row=55, column=5)
 entCuisine = Entry(frame3, width=100)
 entCuisine.grid(row=65, column=5)
-
-#can likely delete entire submit_form section
-def submit_form():
-    """Build function to support entries enterd into the form"""
-    # Get single-line entries
-    name = entry_entrecipeName.get()
-    photo = entry_entPhoto.get()
-    cuisine = entry_entCuisine.get()
-    
-    # Get multi-line entries
-    ingred = text_entingred.get("1.0", tk.END).strip()
-    cooking = text_entCooking.get("1.0", tk.END).strip()
-    
-    # Process the data (e.g., save to file or database)
-    print("Form Data:")
-    print(f"Name: {name}")
-    print(f"Ingredients: {ingred}")
-    print(f"Cooking Instructions: {cooking}")
-    print(f"Cuisine: {cuisine}")
-    
-    # Display confirmation message
-    confirmation_label.config(text="Form submitted successfully!")
-
-    # Clear all inputs (optional)
-    #entry_name.delete(0, tk.END)
-    #entry_email.delete(0, tk.END)
-    #text_address.delete("1.0", tk.END)
-    #text_comments.delete("1.0", tk.END)
-
-#add Submit button - DELETE
-#buttonLabel = Button(frame3, text = "Submit", command = submit_form)
-#buttonLabel.place(relx=0.9, rely=0.9, anchor="e")
-
-# Label for confirmation message - DELETE?? 
-confirmation_label = Label(frame3, text="", fg="green", font=("Arial", 10, "italic"))
-confirmation_label.grid(pady=10)
 
 
 #creating a second window, done with toplevel function
