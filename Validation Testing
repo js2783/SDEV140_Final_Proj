@@ -6,14 +6,14 @@ Test cases:
     --Recipe intake form with three entry fields and submit button
 
 2) In the Recipe search bar, search for recipes: 
-    --If carrot cake is entered, a second window will appear with the recipe. The window will contain a close button that will, upon selection, clear out the entry entered in the search bar on the main window
-    --If any other input is entered, a second window will appear with a message that the recipe is not found. Upon selecting the close button on the second window, the action will clear out the entry entred in the search bar on the main window. 
+    --If carrot cake is entered, a second window will appear with the recipe. 
+    --If any other input is entered, a second window will appear with a message that the recipe is not found. 
+    --When pressing Search on the main application window, any search contents entered will be cleared out. 
 
 3) The Recipe Intake Form shall be validated as follows: 
     --The Ingredients and Cooking Instructions fields shall allow for multiple lines of text to be entered in the field.
     --Upon completing the form and selecting Submit, a second window will appear with a message confirming the submission. 
     --On the second window message confirmation page, a close button will exist. Upon selecting close, it will clear out the content entered on the main applications recipe intake form. 
-    --Upon completing the form and selecting Submit, validation shall occur to ensure all three fields are completed. If not, an error message will appear that all fields must be completed before submitting. 
 
 4) Alt text for images shall be validated. 
 
@@ -42,15 +42,7 @@ Mix all ingredients except chicken breast. Add to large ziplock bag.
 Butterfly chicken and pound out with a meat tenderizer. 
 Add chicken to the ziplock bag. Place bag inside glass cooking dish and set inside refrigerator. 
 Marinate for 24 hours, flipping once. 
-Bake in the oven at 350 or grill. 
+Bake in the oven at 350 or grill.  
 
-3) Recipe Intake Form - Test #2
-Recipe Name: Balsamic chicken marinade
+3) Click the alt text button
 
-Ingredients: 
-leave blank
-
-Cooking Instructions: 
-leave blank
-
-Results: 
