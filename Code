@@ -1,4 +1,34 @@
+#import Tkinter module
 from tkinter import *
+from tkinter import messagebox #for form entry validation
+
+# import pillow to support images
+from PIL import ImageTk, Image 
+
+
+#Create function to define alt text for first image
+def display_alt_text():
+  """Documents alt text for image on main application window"""
+  label.config(text="Feast of Food image")
+
+#Create function to define alt text for Recipe Card in frame 3 intake form 
+def display_alt_text_rc():
+  """Documents alt text for image on main application window"""
+  label.config(text="Photo of Recipe Card")
+
+#def validate_and_submit():
+#    """Validates that items are entered on recipe intake form in string format """
+#    field1 = entrecipeName.get("1.0", END)
+#    field2 = entingred.get("1.0", END)
+#    field3 = entCooking.get("1.0", END)
+
+    # Validation: Check if all fields contain only strings
+#    if not (field1.isalpha() and field2.isalpha() and field3.isalpha()):
+#        messagebox.showerror("Validation Error", "All fields must contain string text only (no numbers).")
+#    else:
+#        open_window()
+
+#create main window
 root = Tk()
 
 #label window title
@@ -8,104 +38,150 @@ root.title("The Recipe Hub")
 my_label = Label(root, text = "Welcome")
 
 #size window
-root.geometry("1000x600")
+root.geometry("1200x700")
 
-#organize the window by creating frames
+#organize the main window by creating frames
 #frame1 welcome
-frame1 = LabelFrame(root, text = "Welcome", background = "#f7d486", padx=10, pady=10)    
-frame1.grid(row = 3, column = 0, rowspan = 10, columnspan=10, sticky="nsew")
+frame1 = LabelFrame(root, text = "Welcome", background = "#f7d486", padx=10, pady=10)   
+frame1.grid(row = 3, column = 0, rowspan = 10, columnspan=10, sticky="nsew") #add to the grid
 
 #frame 2 photo/quote
 frame2 = LabelFrame(root, background = "#f27a7d", padx=10, pady=10)
-frame2.grid(row = 3, column = 25, rowspan=10, columnspan=10, sticky="nsew")
+frame2.grid(row = 3, column = 15, rowspan=10, columnspan=10, sticky="nsew") #add to the grid
 
 #frame 3 intake form
 frame3 = LabelFrame(root, text="New Recipe Intake Form", background = "#C5f9d7", padx=10, pady=10)
-frame3.grid(row = 25, column = 0, rowspan=10, columnspan=250, sticky="nsew")
+frame3.grid(row = 25, column = 0, rowspan=10, columnspan=250, sticky="nsew") #add to the grid
 
 #frame 4 header
 frame4 = LabelFrame(root, background = "light gray")
-frame4.grid(row = 0, column = 0, rowspan=1, columnspan=250, sticky="nsew")
+frame4.grid(row = 0, column = 0, rowspan=2, columnspan=250, sticky="nsew") #add to the grid
 
 #configure grid to make frames equal size
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 root.grid_rowconfigure(0, weight=1)
 
+#add search box in frame 4
+searchLabel = Label(frame4, text="Enter Recipe Name:", width=20, background="light gray")
+searchLabel.grid(row=0, column=30) ##add to the grid
+searchLabel.place(relx=0.65, rely=0.5, anchor="e") #position the label within the freame
+searchEntry = Entry(frame4, width=40) #add entry box
+searchEntry.grid(row=0, column=75) ##add to the grid
+searchEntry.place(relx=0.9, rely=0.5, anchor="e") #position within the frame
+
 # Add a label with a paragraph of text to frame 1
 paragraph = (
     "Welcome to Recipe Hub, your go-to destination for all things culinary! Discover delicious recipes or share your own creations with our vibrant community. Let’s make cooking fun and inspiring! \n\nTo get started, search for a recipe or use the Intake form to enter a new one. "
 )
-label = Label(frame1, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = "#f7d486")
-label.grid(pady=20)
-
-#add photo to Frame 2
-photo = Entry(frame2, width=20)
-photo.grid(row=0, column=40)
-
-#add search box in frame 4
-searchLabel = Label(frame4, text="Search:", width=10, background="light gray")
-searchLabel.grid(row=0, column=30)
-searchLabel.place(relx=0.65, rely=0.5, anchor="e")
-searchEntry = Entry(frame4, width=40)
-searchEntry.grid(row=0, column=50)
-searchEntry.place(relx=0.9, rely=0.5, anchor="e")
-
-# Add a paragraph of text to frame 2
+label = Label(frame1, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = "#f7d486") #position within the frame and add background color
+label.grid(pady=20) ##add to the grid
+    
+# Add a paragraph of text to frame 2 along with an image that possesses alt text
+img = Image.open(".\\FoodImage.png")
+photo = ImageTk.PhotoImage(img)
+img_label = Label(frame2, image=photo)
+img_label.grid(padx=10, pady=10) #add to the grid
 paragraph = (
-    "<photo placeholder> \nA recipe has no soul. You, as the cook, must bring soul to the recipe. \nThomas Keller"
+    "A recipe has no soul. You, as the cook, must bring soul to the recipe. \nThomas Keller"
 )
-label = Label(frame2, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = '#f27a7d')
-label.grid(pady=20)
+label = Label(frame2, text=paragraph, wraplength=350, justify="left", padx=10, pady=10, background = '#f27a7d') #position within the frame and add background color
+label.grid(padx=10, pady=10) #add to the grid
+altbutton = Button(frame2, text="Alt Text", command=display_alt_text) #supports alternate text
+altbutton.grid(row=20, column = 20, padx=10, pady=10) #supports alternate text
 
 #add labels to frame 3
 recipeName = Label(frame3, text="Recipe Name", padx=10, pady=10, background = "#C5f9d7")
 recipeName.grid(row=25, column=0) #add to the grid
 ingredient = Label(frame3, text="Ingredients", padx=10, pady=10, background = "#C5f9d7")
-ingredient.grid(row=35, column=0)
+ingredient.grid(row=35, column=0) #add to the grid
 cooking = Label(frame3, text="Cooking Instructions", padx=10, pady=10, background = "#C5f9d7")
-cooking.grid(row=45, column=0)
-photo = Label(frame3, text="Photo", padx=10, pady=10, background = "#C5f9d7")
-photo.grid(row=55, column=0)
-cuisine = Label(frame3, text="Cuisine/Category", padx=10, pady=10, background = "#C5f9d7")
-cuisine.grid(row=65, column=0)
+cooking.grid(row=45, column=0) #add to the grid
 
 #add textbox to frame 3
-entrecipeName = Entry(frame3, width=100)
-entrecipeName.grid(row=25, column=5)
-entingred = Text(frame3, height=5, width=75) #multi-line entry field
-entingred.grid(row=35, column=5, padx=10, pady=10)
-entCooking = Text(frame3, height=5, width=75) #multi-line entry field
-entCooking.grid(row=45, column=5, padx=10, pady=10)
-entPhoto = Entry(frame3, width=100)
-entPhoto.grid(row=55, column=5)
-entCuisine = Entry(frame3, width=100)
-entCuisine.grid(row=65, column=5)
+entrecipeName = Entry(frame3, width=100) #create entry box
+entrecipeName.grid(row=25, column=5) #add to the grid
+entingred = Text(frame3, height=5, width=75) #create multi-line entry field
+entingred.grid(row=35, column=5, padx=10, pady=10) #add to the grid
+entCooking = Text(frame3, height=5, width=75) # create multi-line entry field
+entCooking.grid(row=45, column=5, padx=10, pady=10) #add to the grid
 
+#add image to frame 3
+img_cc = Image.open(".\\recipecard.png")
+img__cc_resized = img_cc.resize((250, 150)) #resize image 
+photo_cc = ImageTk.PhotoImage(img__cc_resized)
+img_cc_label = Label(frame3, image=photo_cc)
+img_cc_label.grid(row = 15, column = 0, padx=10, pady=10) #add to the grid
+img_cc_label.place(relx=0.9, rely=0.25, anchor="e") #define position on the grid
+altbutton_rc = Button(frame3, text="Alt Text", command=display_alt_text_rc) #supports alternate text
+altbutton_rc.grid(row=20, column = 20, padx=10, pady=10) #supports alternate text
+altbutton_rc.place(relx=0.99, rely=0.25, anchor="e") #places alt text button
 
-#creating a second window, done with toplevel function
-#create function to open window, make a button you click to launch the window
+# Clear all inputs upon closing Recipe Intake form window
+def clear_inputs():
+  '''Create method to clear out the entry and text boxes of the intake form once submit it hit'''
+  entrecipeName.delete(0, END)
+  entingred.delete("1.0", END)
+  entCooking.delete("1.0", END)
+
+#create function to open Recipe Intake confirmation message window, make a button you click to launch the window
 def open_window():
-  """Create second window to show confirmation message upon entering a new repice via the intake form"""
+  """Create second window to show confirmation message upon entering a new recipe via the intake form"""
   window2 = Toplevel(root) #creates a  new window object
   window2.title("The Recipe Hub - Intake Form submission")
   window2.geometry("500x200")
 #create a label to display in the second window
   windowLabel = Label(window2, text = "Form submitted successfully!\nClose the form and relaunch to enter a new recipe.", justify = "left")
-  windowLabel.grid(row = 0, column = 0, columnspan = 10, rowspan = 10)
-  window2.mainloop()
-# Clear all inputs upon closing window
-  entry_entrecipeName.delete(0, tk.END)
-  entry_entPhoto.delete(0, tk.END)
-  entry_entCuisine.delete(0, tk.END)
-  text_entingred.delete("1.0", tk.END)
-  text_entCooking.delete("1.0", tk.END)
+  windowLabel.grid(row = 0, column = 0, padx=10, pady=10)#add to the grid
+  close_button = Button(window2, text="Close", command=lambda: [clear_inputs(), window2.destroy()]) #Add a close button, which helps clear out the contents on the form of the main application window
+  close_button.grid(row=1, column=0, pady=10) #add to the grid
 
-#button to launch new window for Submit off of mainWindow
-newWindow = Button(frame3, text = "Submit", command = open_window)
-newWindow.grid(row = 35, column = 0)
-newWindow.place(relx=0.9, rely=0.9, anchor="e")
+#Submit button to launch new Recipe Intake confirmation message window off of mainWindow
+newWindow = Button(frame3, text = "Submit", command = open_window) 
+newWindow.grid(row = 35, column = 0) #add to the grid
+newWindow.place(relx=0.9, rely=0.9, anchor="e") #position within frame
 
+# Function to open the search results window when the user enters a recipe in the Search field
+def open_results_window():
+  """Create second window to show recipes after user searches for them"""
+  search_query = searchEntry.get().strip()
+  results_window = Toplevel(root) #creates a new window object
+  results_window.title("The Recipe Hub - Search")
+  results_window.geometry("500x500")
 
-#to end any tkinter, need end command
+  if search_query == "carrot cake":
+      result_text = (
+          "Carrot Cake Recipe:\n"
+          "Ingredients:\n"
+          "- 2 cups all-purpose flour\n"
+          "- 2 cups sugar\n"
+          "- 1 tsp baking powder\n"
+          "- 1/2 tsp baking soda\n"
+          "- 1 tsp cinnamon\n"
+          "- 1/4 tsp nutmeg\n"
+          "- 1/2 tsp salt\n"
+          "- 4 eggs\n"
+          "- 1 1/2 cups grated carrots\n"
+          "- 1/2 cup vegetable oil\n"
+          "- 1/2 cup crushed pineapple\n"
+          "Cooking Instructions:\n"
+          "1. Preheat oven to 350°F (175°C).\n"
+          "2. Mix dry ingredients in a bowl.\n"
+          "3. In another bowl, whisk eggs, oil, and pineapple.\n"
+          "4. Combine wet and dry ingredients, fold in carrots.\n"
+          "5. Pour into a greased pan and bake for 35-40 minutes."
+      )      
+  else:
+      result_text = "Recipe not available"
+
+  results_label =  Label(results_window, justify = "left", text = result_text, wraplength=350)
+  results_label.grid(row = 0, column = 0, padx=10, pady=10)#add to the grid
+  searchEntry.delete(0, END) #Clear the Search entry field on the main application window when clicking Search
+  
+#button to launch recipe search
+search_but = Button(frame4, text = "Search", command = open_results_window)
+search_but.grid(row = 35, column = 0) #add to the grid
+search_but.place(relx=.95, rely=0.5, anchor="e")
+
+#run the application
 root.mainloop()
